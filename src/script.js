@@ -2,7 +2,7 @@
 
 //reusable functions
 
-function appendChild(element, children = "") {
+/* function appendChild(element, children = "") {
   if (children === null) {
     return;
   }
@@ -48,63 +48,63 @@ function createBasicElement({
 function getElement(selector) {
   return document.querySelector(selector);
 }
-
+ */
 //create Elem
 
 // add button
-function createAddButton() {
-  const button = createBasicElement({
-    element: "button",
-    className: "c-button__add",
-    children: "+ NEW TASK",
-  });
+// function createAddButton() {
+//   const button = createBasicElement({
+//     element: "button",
+//     className: "c-button__add",
+//     children: "+ NEW TASK",
+//   });
 
-  container.appendChild(button);
+//   container.appendChild(button);
 
-  return button;
-}
-// data
+//   return button;
+// }
+// // data
 
-const app = getElement(".app");
-const container = getElement(".l-container");
-const addButton = createAddButton();
-const tasksContainer = createBasicElement({
-  element: "div",
-  className: "l-tasks",
-});
-container.appendChild(tasksContainer);
+// const app = getElement(".app");
+// const container = getElement(".l-container");
+// const addButton = createAddButton();
+// const tasksContainer = createBasicElement({
+//   element: "div",
+//   className: "l-tasks",
+// });
+// container.appendChild(tasksContainer);
 
-//EVENT
+// //EVENT
 
-addButton.addEventListener("click", renderForm);
+// addButton.addEventListener("click", renderForm);
 
-let tasks = [
-  //   {
-  //     id: 0,
-  //     location: "sd",
-  //     service: "plumber",
-  //     taskType: "dfdf",
-  //     description: "dfdfvfdv",
-  //     fullText: "ldldld",
-  //   },
-  //   {
-  //     id: 1,
-  //     location: "sd",
-  //     service: "plumber",
-  //     taskType: "dfdf",
-  //     description: "dfdfvfdv",
-  //     fullText: "ldldld",
-  //   },
-  //   {
-  //     id: 2,
-  //     location: "sd",
-  //     service: "plumber",
-  //     taskType: "dfdf",
-  //     description: "dfdfvfdv",
-  //     fullText: "ldldld",
-  //   },
+/* let tasks = [
+    {
+      id: 0,
+      location: "sd",
+      service: "plumber",
+      taskType: "dfdf",
+      description: "dfdfvfdv",
+      fullText: "ldldld",
+    },
+    {
+      id: 1,
+      location: "sd",
+      service: "plumber",
+      taskType: "dfdf",
+      description: "dfdfvfdv",
+      fullText: "ldldld",
+    },
+    {
+      id: 2,
+      location: "sd",
+      service: "plumber",
+      taskType: "dfdf",
+      description: "dfdfvfdv",
+      fullText: "ldldld",
+    },
 ];
-
+ */
 const services = [
   {
     type: "electrician",
@@ -481,7 +481,7 @@ function renderForm() {
 
 // Creating Task
 
-function createTask({
+/* function createTask({
   location,
   service,
   taskType,
@@ -501,11 +501,11 @@ function createTask({
   tasks.push(task);
 
   return task;
-}
+} */
 
 //Date
 
-function createTaskDate() {
+/* function createTaskDate() {
   const currentDate = new Date();
 
   const days = [
@@ -550,11 +550,11 @@ function createTaskDate() {
       : currentDate.getMinutes();
 
   return `${day}, ${month} ${date}, ${hours}:${minutes}`;
-}
+} */
 
 //Create Task Card
 
-function createTaskCard(task) {
+/* function createTaskCard(task) {
   const date = createBasicElement({
     element: "p",
     className: "c-date",
@@ -616,7 +616,7 @@ renderTasks(tasks);
 function deleteTask() {
   const dataId = +event.target.dataset.id;
 
-  tasks = tasks.filter((el) => el.id !== dataId);
+  // tasks = tasks.filter((el) => el.id !== dataId);
 
   renderTasks(tasks);
-}
+} */
