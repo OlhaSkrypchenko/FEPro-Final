@@ -115,14 +115,14 @@ export default class FormModel {
     return service.tasks;
   }
 
-  //   _onChangeData(data) {
-  //     localStorage.setItem("tasks", JSON.stringify(data));
-  //     this.onTasksListChanged(this._data);
-  //   }
+  _onDataChange(data) {
+    localStorage.setItem("tasks", JSON.stringify(data));
+    // this.onTasksListChanged(this._data);
+  }
 
-  //   getTask(id) {
-  //     return this._data.find((el) => (el.id = id));
-  //   }
+  getTask(id) {
+    return this._data.find((el) => el.id === id);
+  }
 
   get _data() {
     return JSON.parse(localStorage.getItem("tasks"));
@@ -141,6 +141,22 @@ export default class FormModel {
     };
 
     localStorage.setItem("tasks", JSON.stringify([...this._data, task]));
-    console.log(this._data);
+  }
+
+  editTask({ id, location, service, taskType, description = "", fullText }) {
+    const data = this._data.map((task) =>
+      task.id === id
+        ? {
+            id,
+            date: this.createTaskDate(),
+            location,
+            service,
+            taskType,
+            description,
+            fullText,
+          }
+        : task
+    );
+    this._onDataChange(data);
   }
 }

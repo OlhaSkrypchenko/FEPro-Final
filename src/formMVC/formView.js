@@ -16,10 +16,6 @@ export default class FormView {
 
     appendChild(this.app, this.formContainer);
 
-    // this.servicesField = createBasicElement({
-    //   element: "div",
-    // });
-
     this.serviceTasksField = createBasicElement({
       element: "div",
     });
@@ -37,7 +33,10 @@ export default class FormView {
     return taskFieldTitle;
   }
 
-  _createTaskField(titleText) {
+  _createTaskField({
+    titleText = "NEW TASK",
+    buttonValue = "CREATE TASK",
+  } = {}) {
     const title = this._createTitle(titleText);
 
     this.taskFieldText = createBasicElement({
@@ -54,7 +53,7 @@ export default class FormView {
       element: "input",
       className: "c-button__create",
       attributes: {
-        value: "CREATE TASK",
+        value: buttonValue,
         type: "submit",
       },
     });
@@ -72,13 +71,13 @@ export default class FormView {
     return taskField;
   }
 
-  _createLocationField(titleText) {
+  _createLocationField({ titleText = "LOCATION", location = "" } = {}) {
     const title = this._createTitle(titleText);
 
     this.locationInput = createBasicElement({
       element: "input",
       className: "c-input__location",
-      attributes: { required: "required" },
+      attributes: { required: "required", value: location },
     });
 
     const locationField = createBasicElement({
@@ -89,7 +88,11 @@ export default class FormView {
     return locationField;
   }
 
-  _createServiceField(titleText, services) {
+  _createServiceField({
+    titleText = "SERVICE ",
+    services,
+    checkedService = "",
+  } = {}) {
     const servicesField = createBasicElement({
       element: "div",
     });
@@ -104,6 +107,7 @@ export default class FormView {
     services.forEach((el) => {
       const radio = createBasicElement({
         element: "input",
+        className: "c-input__service",
         attributes: {
           type: "radio",
           value: el.type,
@@ -112,6 +116,11 @@ export default class FormView {
           required: "required",
         },
       });
+
+      if (checkedService === radio.id) {
+        radio.setAttribute("checked", "checked");
+        this.checkedRadio = radio.value;
+      }
 
       const label = createBasicElement({
         element: "label",
@@ -136,12 +145,16 @@ export default class FormView {
     return servicesField;
   }
 
-  _createDescriptionField(titleText) {
+  _createDescriptionField({
+    titleText = "TASK DESCRIPTION",
+    description = "",
+  } = {}) {
     const title = this._createTitle(titleText);
 
     this.descriptionInput = createBasicElement({
       element: "textarea",
       className: "c-textarea__description",
+      children: description,
     });
 
     const descriptionField = createBasicElement({
@@ -152,7 +165,11 @@ export default class FormView {
     return descriptionField;
   }
 
-  fillAddress() {
+  fillAddress(location = "") {
+    if (this.locationInput.value) {
+      this.taskFieldAddress.innerHTML = `My address is ${location}`;
+    }
+
     this.locationInput.addEventListener("input", (event) => {
       this.location = event.target.value;
       this.taskFieldAddress.innerHTML = `My address is ${this.location}`;
@@ -167,6 +184,11 @@ export default class FormView {
   }
 
   fillFirstPartTaskFieldText() {
+    if (this.checkedRadio) {
+      this.fullTextArr[0] = `I need a(an) ${this.checkedRadio}`;
+      this.fillTextTaskFieldText();
+    }
+
     this.servicesContainer.addEventListener("click", (event) => {
       if (typeof event.target.value === "undefined") {
         return;
@@ -174,11 +196,18 @@ export default class FormView {
 
       this.service = event.target.value;
       this.fullTextArr[0] = `I need a(an) ${this.service}`;
+      this.checkedTypeRadio = "";
+      this.fullTextArr.splice(1, 1);
       this.fillTextTaskFieldText();
     });
   }
 
   fillSecondPartTaskFieldText() {
+    if (this.checkedTypeRadio) {
+      this.fullTextArr[1] = ` to ${this.checkedTypeRadio}`;
+      this.fillTextTaskFieldText();
+    }
+
     this.serviceTaskContainer.addEventListener("click", (event) => {
       if (typeof event.target.value === "undefined") {
         return;
@@ -192,6 +221,11 @@ export default class FormView {
   }
 
   fillThirdPartTaskFieldText() {
+    if (this.descriptionInput.value) {
+      this.fullTextArr[2] = ` , ${this.descriptionInput.value}`;
+      this.fillTextTaskFieldText();
+    }
+
     this.descriptionInput.addEventListener("input", (event) => {
       if (event.target.value === "") {
         this.fullTextArr.splice(2, 1);
@@ -209,16 +243,19 @@ export default class FormView {
 
   clearFormContainer() {
     this.formContainer.innerHTML = "";
+    this.fullTextArr = [];
+    this.checkedRadio = "";
+    this.checkedTypeRadio = "";
   }
 
   closeForm() {
-    this.closeButton.addEventListener(
-      "click",
-      this.clearFormContainer.bind(this)
-    );
+    this.closeButton.addEventListener("click", () => {
+      this._resetInputValues();
+      this.clearFormContainer();
+    });
   }
 
-  renderServiceTaskField(titleText, tasks) {
+  renderServiceTaskField(titleText, tasks, checkedServiceType = "") {
     this.serviceTasksField.innerHTML = "";
 
     const title = this._createTitle(titleText);
@@ -239,6 +276,11 @@ export default class FormView {
           required: "required",
         },
       });
+
+      if (checkedServiceType === radio.id) {
+        radio.setAttribute("checked", "checked");
+        this.checkedTypeRadio = radio.value;
+      }
 
       const label = createBasicElement({
         element: "label",
@@ -262,13 +304,13 @@ export default class FormView {
     this.fillSecondPartTaskFieldText();
   }
 
-  renderForm(services) {
+  renderAddForm(services) {
     this.clearFormContainer();
 
-    const taskField = this._createTaskField("NEW TASK");
-    const locationField = this._createLocationField("LOCATION");
-    const servicesField = this._createServiceField("SERVICE TYPE", services);
-    const descriptionField = this._createDescriptionField("TASK DESCRIPTION");
+    const taskField = this._createTaskField();
+    const locationField = this._createLocationField();
+    const servicesField = this._createServiceField({ services });
+    const descriptionField = this._createDescriptionField();
 
     this.closeButton = createBasicElement({
       element: "button",
@@ -299,7 +341,15 @@ export default class FormView {
     this.closeForm();
   }
 
-  bindRenderServiceTaskField(handler) {
+  bindRenderServiceTaskField(handler, checkedTypeRadio = "") {
+    if (this.checkedRadio) {
+      this.renderServiceTaskField(
+        `${this.checkedRadio} tasks`,
+        handler(this.checkedRadio),
+        checkedTypeRadio
+      );
+    }
+
     this.servicesContainer.addEventListener("click", (event) => {
       if (typeof event.target.value === "undefined") {
         return;
@@ -313,6 +363,7 @@ export default class FormView {
 
   get _taskValues() {
     return {
+      id: this.editTaskId ? this.editTaskId : "",
       location: this.location,
       service: this.service,
       taskType: this.taskType,
@@ -330,14 +381,76 @@ export default class FormView {
         handlerRender();
       }
 
+      this._resetInputValues();
       this.clearFormContainer();
     });
   }
 
-  /*   bindRenderTasks(handler) {
+  bindEditTask(handlerEdit, handlerRender) {
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
-      handler();
+
+      if (this._taskValues) {
+        handlerEdit(this._taskValues);
+        handlerRender();
+      }
+
+      this._resetInputValues();
+      this.clearFormContainer();
     });
-  } */
+  }
+
+  _resetInputValues() {
+    this.locationInput.value = "";
+    this.descriptionInput.value = "";
+  }
+
+  renderEditForm(task, services) {
+    this.clearFormContainer();
+
+    this.editTaskId = task.id;
+
+    const taskField = this._createTaskField({
+      titleText: "EDIT TASK",
+      buttonValue: "SAVE",
+    });
+    const locationField = this._createLocationField({
+      location: task.location,
+    });
+    const servicesField = this._createServiceField({
+      services,
+      checkedService: task.service,
+    });
+    const descriptionField = this._createDescriptionField({
+      description: task.description,
+    });
+
+    this.closeButton = createBasicElement({
+      element: "button",
+      className: "c-button__close",
+      attributes: {
+        type: "button",
+      },
+      children: "X",
+    });
+
+    this.form = createBasicElement({
+      element: "form",
+      className: "c-form",
+      children: [
+        taskField,
+        locationField,
+        servicesField,
+        descriptionField,
+        this.closeButton,
+      ],
+    });
+
+    appendChild(this.formContainer, this.form);
+
+    this.fillAddress(task.location);
+    this.fillFirstPartTaskFieldText();
+    this.fillThirdPartTaskFieldText();
+    this.closeForm();
+  }
 }

@@ -23,14 +23,21 @@ export default class TasksController {
   handlerRenderTasks() {
     this.view.renderTasks(this.model._data);
     this.view.bindDeleteTask(this.handleDeleteTask.bind(this));
-    this.view.bindRenderForm(this.handlerRenderForm.bind(this));
+    this.view.bindRenderAddForm(this.handlerRenderAddForm.bind(this));
+    this.view.bindRenderEditForm((id) => {
+      this.handlerRenderEditForm.call(this, id);
+    });
     // this.listView.bindCreateEditingForm(
     //   this.handleCreateEditingForm.bind(this)
     // );
     // this.listView.bindEditUser(this.handleEditUser.bind(this));
   }
 
-  handlerRenderForm() {
-    this.pubsub.publish("renderForm");
+  handlerRenderAddForm() {
+    this.pubsub.publish("renderAddForm");
+  }
+
+  handlerRenderEditForm(id) {
+    this.pubsub.publish("renderEditForm", id);
   }
 }

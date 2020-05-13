@@ -634,22 +634,21 @@ class TasksView {
     });
   }
 
-  // bindEditTask(handler) {
-  //   this.tasksContainer.addEventListener("click", (event) => {
-  //     const dataId = event.target.dataset.editId;
-
-  //     if (!dataId) {
-  //       return;
-  //     }
-
-  //     const id = parseInt(dataId);
-
-  //     handler(id);
-  //   });
-  // }
-
-  bindRenderForm(handler) {
+  bindRenderAddForm(handler) {
     this.addButton.addEventListener("click", handler);
+  }
+
+  bindRenderEditForm(handler) {
+    this.tasksContainer.addEventListener("click", (event) => {
+      const dataId = event.target.dataset.editId;
+
+      if (!dataId) {
+        return;
+      }
+
+      const id = parseInt(dataId);
+      handler(id);
+    });
   }
 }
 
@@ -747,22 +746,22 @@ class TasksModel {
     this._onChangeData(data);
   }
 
-  editTask({ id, location, service, taskType, description = "", fullText }) {
-    const data = this._data.map((task) =>
-      task.id === id
-        ? {
-            id,
-            date: this.createTaskDate(),
-            location,
-            service,
-            taskType,
-            description,
-            fullText,
-          }
-        : task
-    );
-    this._onDataChange(data);
-  }
+  // editTask({ id, location, service, taskType, description = "", fullText }) {
+  //   const data = this._data.map((task) =>
+  //     task.id === id
+  //       ? {
+  //           id,
+  //           date: this.createTaskDate(),
+  //           location,
+  //           service,
+  //           taskType,
+  //           description,
+  //           fullText,
+  //         }
+  //       : task
+  //   );
+  //   this._onDataChange(data);
+  // }
 
   bindTasksListChanged(callback) {
     this.onTasksListChanged = callback;
@@ -802,15 +801,22 @@ class TasksController {
   handlerRenderTasks() {
     this.view.renderTasks(this.model._data);
     this.view.bindDeleteTask(this.handleDeleteTask.bind(this));
-    this.view.bindRenderForm(this.handlerRenderForm.bind(this));
+    this.view.bindRenderAddForm(this.handlerRenderAddForm.bind(this));
+    this.view.bindRenderEditForm((id) => {
+      this.handlerRenderEditForm.call(this, id);
+    });
     // this.listView.bindCreateEditingForm(
     //   this.handleCreateEditingForm.bind(this)
     // );
     // this.listView.bindEditUser(this.handleEditUser.bind(this));
   }
 
-  handlerRenderForm() {
-    this.pubsub.publish("renderForm");
+  handlerRenderAddForm() {
+    this.pubsub.publish("renderAddForm");
+  }
+
+  handlerRenderEditForm(id) {
+    this.pubsub.publish("renderEditForm", id);
   }
 }
 
@@ -836,10 +842,6 @@ class FormView {
 
     Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["appendChild"])(this.app, this.formContainer);
 
-    // this.servicesField = createBasicElement({
-    //   element: "div",
-    // });
-
     this.serviceTasksField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
     });
@@ -857,7 +859,10 @@ class FormView {
     return taskFieldTitle;
   }
 
-  _createTaskField(titleText) {
+  _createTaskField({
+    titleText = "NEW TASK",
+    buttonValue = "CREATE TASK",
+  } = {}) {
     const title = this._createTitle(titleText);
 
     this.taskFieldText = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
@@ -874,7 +879,7 @@ class FormView {
       element: "input",
       className: "c-button__create",
       attributes: {
-        value: "CREATE TASK",
+        value: buttonValue,
         type: "submit",
       },
     });
@@ -892,13 +897,13 @@ class FormView {
     return taskField;
   }
 
-  _createLocationField(titleText) {
+  _createLocationField({ titleText = "LOCATION", location = "" } = {}) {
     const title = this._createTitle(titleText);
 
     this.locationInput = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "input",
       className: "c-input__location",
-      attributes: { required: "required" },
+      attributes: { required: "required", value: location },
     });
 
     const locationField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
@@ -909,7 +914,11 @@ class FormView {
     return locationField;
   }
 
-  _createServiceField(titleText, services) {
+  _createServiceField({
+    titleText = "SERVICE ",
+    services,
+    checkedService = "",
+  } = {}) {
     const servicesField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
     });
@@ -924,6 +933,7 @@ class FormView {
     services.forEach((el) => {
       const radio = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
         element: "input",
+        className: "c-input__service",
         attributes: {
           type: "radio",
           value: el.type,
@@ -932,6 +942,11 @@ class FormView {
           required: "required",
         },
       });
+
+      if (checkedService === radio.id) {
+        radio.setAttribute("checked", "checked");
+        this.checkedRadio = radio.value;
+      }
 
       const label = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
         element: "label",
@@ -956,12 +971,16 @@ class FormView {
     return servicesField;
   }
 
-  _createDescriptionField(titleText) {
+  _createDescriptionField({
+    titleText = "TASK DESCRIPTION",
+    description = "",
+  } = {}) {
     const title = this._createTitle(titleText);
 
     this.descriptionInput = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "textarea",
       className: "c-textarea__description",
+      children: description,
     });
 
     const descriptionField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
@@ -972,7 +991,11 @@ class FormView {
     return descriptionField;
   }
 
-  fillAddress() {
+  fillAddress(location = "") {
+    if (this.locationInput.value) {
+      this.taskFieldAddress.innerHTML = `My address is ${location}`;
+    }
+
     this.locationInput.addEventListener("input", (event) => {
       this.location = event.target.value;
       this.taskFieldAddress.innerHTML = `My address is ${this.location}`;
@@ -987,6 +1010,11 @@ class FormView {
   }
 
   fillFirstPartTaskFieldText() {
+    if (this.checkedRadio) {
+      this.fullTextArr[0] = `I need a(an) ${this.checkedRadio}`;
+      this.fillTextTaskFieldText();
+    }
+
     this.servicesContainer.addEventListener("click", (event) => {
       if (typeof event.target.value === "undefined") {
         return;
@@ -994,11 +1022,18 @@ class FormView {
 
       this.service = event.target.value;
       this.fullTextArr[0] = `I need a(an) ${this.service}`;
+      this.checkedTypeRadio = "";
+      this.fullTextArr.splice(1, 1);
       this.fillTextTaskFieldText();
     });
   }
 
   fillSecondPartTaskFieldText() {
+    if (this.checkedTypeRadio) {
+      this.fullTextArr[1] = ` to ${this.checkedTypeRadio}`;
+      this.fillTextTaskFieldText();
+    }
+
     this.serviceTaskContainer.addEventListener("click", (event) => {
       if (typeof event.target.value === "undefined") {
         return;
@@ -1012,6 +1047,11 @@ class FormView {
   }
 
   fillThirdPartTaskFieldText() {
+    if (this.descriptionInput.value) {
+      this.fullTextArr[2] = ` , ${this.descriptionInput.value}`;
+      this.fillTextTaskFieldText();
+    }
+
     this.descriptionInput.addEventListener("input", (event) => {
       if (event.target.value === "") {
         this.fullTextArr.splice(2, 1);
@@ -1029,16 +1069,19 @@ class FormView {
 
   clearFormContainer() {
     this.formContainer.innerHTML = "";
+    this.fullTextArr = [];
+    this.checkedRadio = "";
+    this.checkedTypeRadio = "";
   }
 
   closeForm() {
-    this.closeButton.addEventListener(
-      "click",
-      this.clearFormContainer.bind(this)
-    );
+    this.closeButton.addEventListener("click", () => {
+      this._resetInputValues();
+      this.clearFormContainer();
+    });
   }
 
-  renderServiceTaskField(titleText, tasks) {
+  renderServiceTaskField(titleText, tasks, checkedServiceType = "") {
     this.serviceTasksField.innerHTML = "";
 
     const title = this._createTitle(titleText);
@@ -1059,6 +1102,11 @@ class FormView {
           required: "required",
         },
       });
+
+      if (checkedServiceType === radio.id) {
+        radio.setAttribute("checked", "checked");
+        this.checkedTypeRadio = radio.value;
+      }
 
       const label = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
         element: "label",
@@ -1082,13 +1130,13 @@ class FormView {
     this.fillSecondPartTaskFieldText();
   }
 
-  renderForm(services) {
+  renderAddForm(services) {
     this.clearFormContainer();
 
-    const taskField = this._createTaskField("NEW TASK");
-    const locationField = this._createLocationField("LOCATION");
-    const servicesField = this._createServiceField("SERVICE TYPE", services);
-    const descriptionField = this._createDescriptionField("TASK DESCRIPTION");
+    const taskField = this._createTaskField();
+    const locationField = this._createLocationField();
+    const servicesField = this._createServiceField({ services });
+    const descriptionField = this._createDescriptionField();
 
     this.closeButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "button",
@@ -1119,7 +1167,15 @@ class FormView {
     this.closeForm();
   }
 
-  bindRenderServiceTaskField(handler) {
+  bindRenderServiceTaskField(handler, checkedTypeRadio = "") {
+    if (this.checkedRadio) {
+      this.renderServiceTaskField(
+        `${this.checkedRadio} tasks`,
+        handler(this.checkedRadio),
+        checkedTypeRadio
+      );
+    }
+
     this.servicesContainer.addEventListener("click", (event) => {
       if (typeof event.target.value === "undefined") {
         return;
@@ -1133,6 +1189,7 @@ class FormView {
 
   get _taskValues() {
     return {
+      id: this.editTaskId ? this.editTaskId : "",
       location: this.location,
       service: this.service,
       taskType: this.taskType,
@@ -1150,16 +1207,78 @@ class FormView {
         handlerRender();
       }
 
+      this._resetInputValues();
       this.clearFormContainer();
     });
   }
 
-  /*   bindRenderTasks(handler) {
+  bindEditTask(handlerEdit, handlerRender) {
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
-      handler();
+
+      if (this._taskValues) {
+        handlerEdit(this._taskValues);
+        handlerRender();
+      }
+
+      this._resetInputValues();
+      this.clearFormContainer();
     });
-  } */
+  }
+
+  _resetInputValues() {
+    this.locationInput.value = "";
+    this.descriptionInput.value = "";
+  }
+
+  renderEditForm(task, services) {
+    this.clearFormContainer();
+
+    this.editTaskId = task.id;
+
+    const taskField = this._createTaskField({
+      titleText: "EDIT TASK",
+      buttonValue: "SAVE",
+    });
+    const locationField = this._createLocationField({
+      location: task.location,
+    });
+    const servicesField = this._createServiceField({
+      services,
+      checkedService: task.service,
+    });
+    const descriptionField = this._createDescriptionField({
+      description: task.description,
+    });
+
+    this.closeButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "button",
+      className: "c-button__close",
+      attributes: {
+        type: "button",
+      },
+      children: "X",
+    });
+
+    this.form = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "form",
+      className: "c-form",
+      children: [
+        taskField,
+        locationField,
+        servicesField,
+        descriptionField,
+        this.closeButton,
+      ],
+    });
+
+    Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["appendChild"])(this.formContainer, this.form);
+
+    this.fillAddress(task.location);
+    this.fillFirstPartTaskFieldText();
+    this.fillThirdPartTaskFieldText();
+    this.closeForm();
+  }
 }
 
 
@@ -1287,14 +1406,14 @@ class FormModel {
     return service.tasks;
   }
 
-  //   _onChangeData(data) {
-  //     localStorage.setItem("tasks", JSON.stringify(data));
-  //     this.onTasksListChanged(this._data);
-  //   }
+  _onDataChange(data) {
+    localStorage.setItem("tasks", JSON.stringify(data));
+    // this.onTasksListChanged(this._data);
+  }
 
-  //   getTask(id) {
-  //     return this._data.find((el) => (el.id = id));
-  //   }
+  getTask(id) {
+    return this._data.find((el) => el.id === id);
+  }
 
   get _data() {
     return JSON.parse(localStorage.getItem("tasks"));
@@ -1313,7 +1432,23 @@ class FormModel {
     };
 
     localStorage.setItem("tasks", JSON.stringify([...this._data, task]));
-    console.log(this._data);
+  }
+
+  editTask({ id, location, service, taskType, description = "", fullText }) {
+    const data = this._data.map((task) =>
+      task.id === id
+        ? {
+            id,
+            date: this.createTaskDate(),
+            location,
+            service,
+            taskType,
+            description,
+            fullText,
+          }
+        : task
+    );
+    this._onDataChange(data);
   }
 }
 
@@ -1331,13 +1466,22 @@ class FormController {
     this.view = view;
     this.pubsub = pubsub;
 
-    this.pubsub.subscribe("renderForm", this.handleRenderForm.bind(this));
+    this.pubsub.subscribe("renderAddForm", this.handleRenderAddForm.bind(this));
+    this.pubsub.subscribe("renderEditForm", (id) => {
+      this.handleRenderEditForm(id);
+    });
   }
 
-  handleRenderForm() {
-    this.view.renderForm(this.model.services);
+  handleRenderAddForm() {
+    this.view.renderAddForm(this.model.services);
     this.handlerBindAddTask();
     this.handlerRenderServiceTaskField();
+  }
+
+  handleRenderEditForm(id) {
+    this.view.renderEditForm(this.model.getTask(id), this.model.services);
+    this.handlerBindEditTask();
+    this.handlerRenderServiceTaskField(this.model.getTask(id).taskType);
   }
 
   handleGetTasks(service) {
@@ -1348,6 +1492,10 @@ class FormController {
     this.model.addTask(task);
   }
 
+  handleEditTask(task) {
+    this.model.editTask(task);
+  }
+
   handlerBindAddTask() {
     this.view.bindAddTask(
       this.handleAddTask.bind(this),
@@ -1355,8 +1503,18 @@ class FormController {
     );
   }
 
-  handlerRenderServiceTaskField() {
-    this.view.bindRenderServiceTaskField(this.handleGetTasks.bind(this));
+  handlerBindEditTask() {
+    this.view.bindEditTask(
+      this.handleEditTask.bind(this),
+      this.handlerRenderTasks.bind(this)
+    );
+  }
+
+  handlerRenderServiceTaskField(checkedTypeRadio) {
+    this.view.bindRenderServiceTaskField(
+      this.handleGetTasks.bind(this),
+      checkedTypeRadio
+    );
   }
 
   handlerRenderTasks() {

@@ -24,22 +24,22 @@ export default class TasksModel {
     this._onChangeData(data);
   }
 
-  editTask({ id, location, service, taskType, description = "", fullText }) {
-    const data = this._data.map((task) =>
-      task.id === id
-        ? {
-            id,
-            date: this.createTaskDate(),
-            location,
-            service,
-            taskType,
-            description,
-            fullText,
-          }
-        : task
-    );
-    this._onDataChange(data);
-  }
+  // editTask({ id, location, service, taskType, description = "", fullText }) {
+  //   const data = this._data.map((task) =>
+  //     task.id === id
+  //       ? {
+  //           id,
+  //           date: this.createTaskDate(),
+  //           location,
+  //           service,
+  //           taskType,
+  //           description,
+  //           fullText,
+  //         }
+  //       : task
+  //   );
+  //   this._onDataChange(data);
+  // }
 
   bindTasksListChanged(callback) {
     this.onTasksListChanged = callback;
