@@ -96,19 +96,19 @@ export default class TasksView {
     });
   }
 
-  bindEditTask(handler) {
-    this.tasksContainer.addEventListener("click", (event) => {
-      const dataId = event.target.dataset.editId;
+  // bindEditTask(handler) {
+  //   this.tasksContainer.addEventListener("click", (event) => {
+  //     const dataId = event.target.dataset.editId;
 
-      if (!dataId) {
-        return;
-      }
+  //     if (!dataId) {
+  //       return;
+  //     }
 
-      const id = parseInt(dataId);
+  //     const id = parseInt(dataId);
 
-      handler(id);
-    });
-  }
+  //     handler(id);
+  //   });
+  // }
 
   bindRenderForm(handler) {
     this.addButton.addEventListener("click", handler);

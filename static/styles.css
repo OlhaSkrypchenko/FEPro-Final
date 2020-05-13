@@ -4,7 +4,7 @@
 }
 
 .l-form {
-  min-width: 500px;
+  width: 500px;
 }
 
 .l-container {
@@ -19,6 +19,7 @@
 .c-task {
   border: 1px solid #000;
   margin: 15px 0;
+  padding: 10px;
 }
 
 .c-form {
@@ -29,4 +30,14 @@
   position: absolute;
   top: 15px;
   right: 10px;
+}
+
+.c-address {
+  min-height: 25px;
+  padding: 10px 0;
+}
+
+.c-taskText {
+  min-height: 50px;
+  padding: 10px 0;
 }

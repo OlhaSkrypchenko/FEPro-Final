@@ -1,7 +1,10 @@
 export default class TasksController {
-  constructor(model, view) {
+  constructor(model, view, pubsub) {
     this.model = model;
     this.view = view;
+    this.pubsub = pubsub;
+
+    this.pubsub.subscribe("renderTasks", this.handlerRenderTasks.bind(this));
 
     this.handlerRenderTasks();
 
@@ -20,10 +23,14 @@ export default class TasksController {
   handlerRenderTasks() {
     this.view.renderTasks(this.model._data);
     this.view.bindDeleteTask(this.handleDeleteTask.bind(this));
+    this.view.bindRenderForm(this.handlerRenderForm.bind(this));
     // this.listView.bindCreateEditingForm(
     //   this.handleCreateEditingForm.bind(this)
     // );
     // this.listView.bindEditUser(this.handleEditUser.bind(this));
-    // this.listView.bindRenderFormPage(this.handlerRenderForm.bind(this));
+  }
+
+  handlerRenderForm() {
+    this.pubsub.publish("renderForm");
   }
 }
