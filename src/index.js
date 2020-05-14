@@ -9,12 +9,16 @@ import FormController from "./formMVC/formController";
 
 import PubSub from "./pubsub";
 
-const pubsub = new PubSub();
+function app() {
+  const pubsub = new PubSub();
 
-const tasksView = new TasksView();
-const tasksModel = new TasksModel();
-const tasksController = new TasksController(tasksModel, tasksView, pubsub);
+  const tasksView = new TasksView();
+  const tasksModel = new TasksModel();
+  const tasksController = new TasksController(tasksModel, tasksView, pubsub);
 
-const formView = new FormView();
-const formModel = new FormModel();
-const formController = new FormController(formModel, formView, pubsub);
+  const formView = new FormView();
+  const formModel = new FormModel();
+  const formController = new FormController(formModel, formView, pubsub);
+}
+
+app();

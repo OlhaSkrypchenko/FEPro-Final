@@ -5,7 +5,7 @@ export default class TasksModel {
     }
   }
 
-  _onChangeData(data) {
+  _onDataChange(data) {
     localStorage.setItem("tasks", JSON.stringify(data));
     this.onTasksListChanged(this._data);
   }
@@ -21,25 +21,8 @@ export default class TasksModel {
   deleteTask(id) {
     const data = this._data.filter((el) => el.id !== id);
 
-    this._onChangeData(data);
+    this._onDataChange(data);
   }
-
-  // editTask({ id, location, service, taskType, description = "", fullText }) {
-  //   const data = this._data.map((task) =>
-  //     task.id === id
-  //       ? {
-  //           id,
-  //           date: this.createTaskDate(),
-  //           location,
-  //           service,
-  //           taskType,
-  //           description,
-  //           fullText,
-  //         }
-  //       : task
-  //   );
-  //   this._onDataChange(data);
-  // }
 
   bindTasksListChanged(callback) {
     this.onTasksListChanged = callback;

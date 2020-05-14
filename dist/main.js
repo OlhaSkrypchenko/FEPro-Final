@@ -110,15 +110,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const pubsub = new _pubsub__WEBPACK_IMPORTED_MODULE_7__["default"]();
+function app() {
+  const pubsub = new _pubsub__WEBPACK_IMPORTED_MODULE_7__["default"]();
 
-const tasksView = new _tasksMVC_tasksView__WEBPACK_IMPORTED_MODULE_1__["default"]();
-const tasksModel = new _tasksMVC_tasksModel__WEBPACK_IMPORTED_MODULE_2__["default"]();
-const tasksController = new _tasksMVC_tasksController__WEBPACK_IMPORTED_MODULE_3__["default"](tasksModel, tasksView, pubsub);
+  const tasksView = new _tasksMVC_tasksView__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  const tasksModel = new _tasksMVC_tasksModel__WEBPACK_IMPORTED_MODULE_2__["default"]();
+  const tasksController = new _tasksMVC_tasksController__WEBPACK_IMPORTED_MODULE_3__["default"](tasksModel, tasksView, pubsub);
 
-const formView = new _formMVC_formView__WEBPACK_IMPORTED_MODULE_4__["default"]();
-const formModel = new _formMVC_formModel__WEBPACK_IMPORTED_MODULE_5__["default"]();
-const formController = new _formMVC_formController__WEBPACK_IMPORTED_MODULE_6__["default"](formModel, formView, pubsub);
+  const formView = new _formMVC_formView__WEBPACK_IMPORTED_MODULE_4__["default"]();
+  const formModel = new _formMVC_formModel__WEBPACK_IMPORTED_MODULE_5__["default"]();
+  const formController = new _formMVC_formController__WEBPACK_IMPORTED_MODULE_6__["default"](formModel, formView, pubsub);
+}
+
+app();
 
 
 /***/ }),
@@ -727,7 +731,7 @@ class TasksModel {
     }
   }
 
-  _onChangeData(data) {
+  _onDataChange(data) {
     localStorage.setItem("tasks", JSON.stringify(data));
     this.onTasksListChanged(this._data);
   }
@@ -743,25 +747,8 @@ class TasksModel {
   deleteTask(id) {
     const data = this._data.filter((el) => el.id !== id);
 
-    this._onChangeData(data);
+    this._onDataChange(data);
   }
-
-  // editTask({ id, location, service, taskType, description = "", fullText }) {
-  //   const data = this._data.map((task) =>
-  //     task.id === id
-  //       ? {
-  //           id,
-  //           date: this.createTaskDate(),
-  //           location,
-  //           service,
-  //           taskType,
-  //           description,
-  //           fullText,
-  //         }
-  //       : task
-  //   );
-  //   this._onDataChange(data);
-  // }
 
   bindTasksListChanged(callback) {
     this.onTasksListChanged = callback;
@@ -796,6 +783,7 @@ class TasksController {
 
   handleDeleteTask(id) {
     this.model.deleteTask(id);
+    this.handleCloseEditForm(id);
   }
 
   handlerRenderTasks() {
@@ -805,10 +793,6 @@ class TasksController {
     this.view.bindRenderEditForm((id) => {
       this.handlerRenderEditForm.call(this, id);
     });
-    // this.listView.bindCreateEditingForm(
-    //   this.handleCreateEditingForm.bind(this)
-    // );
-    // this.listView.bindEditUser(this.handleEditUser.bind(this));
   }
 
   handlerRenderAddForm() {
@@ -817,6 +801,10 @@ class TasksController {
 
   handlerRenderEditForm(id) {
     this.pubsub.publish("renderEditForm", id);
+  }
+
+  handleCloseEditForm(id) {
+    this.pubsub.publish("closeEditForm", id);
   }
 }
 
@@ -1023,7 +1011,7 @@ class FormView {
       this.service = event.target.value;
       this.fullTextArr[0] = `I need a(an) ${this.service}`;
       this.checkedTypeRadio = "";
-      this.fullTextArr.splice(1, 1);
+      this.fullTextArr.splice(1);
       this.fillTextTaskFieldText();
     });
   }
@@ -1040,9 +1028,11 @@ class FormView {
       }
 
       this.taskType = event.target.value;
-      this.fullTextArr.splice(1, 1);
+
       this.fullTextArr[1] = ` to ${this.taskType}`;
+
       this.fillTextTaskFieldText();
+      this.fillThirdPartTaskFieldText();
     });
   }
 
@@ -1078,6 +1068,8 @@ class FormView {
     this.closeButton.addEventListener("click", () => {
       this._resetInputValues();
       this.clearFormContainer();
+      this.editTaskId = "";
+      this.editTaskDate = "";
     });
   }
 
@@ -1190,6 +1182,7 @@ class FormView {
   get _taskValues() {
     return {
       id: this.editTaskId ? this.editTaskId : "",
+      date: this.editTaskDate ? this.editTaskDate : "",
       location: this.location,
       service: this.service,
       taskType: this.taskType,
@@ -1235,6 +1228,7 @@ class FormView {
     this.clearFormContainer();
 
     this.editTaskId = task.id;
+    this.editTaskDate = task.date;
 
     const taskField = this._createTaskField({
       titleText: "EDIT TASK",
@@ -1278,6 +1272,16 @@ class FormView {
     this.fillFirstPartTaskFieldText();
     this.fillThirdPartTaskFieldText();
     this.closeForm();
+  }
+
+  closeEditForm(id) {
+    if (this.editTaskId === id) {
+      this._resetInputValues();
+      this.clearFormContainer();
+      this.editTaskId = "";
+      this.editTaskDate = "";
+    }
+    return;
   }
 }
 
@@ -1408,7 +1412,6 @@ class FormModel {
 
   _onDataChange(data) {
     localStorage.setItem("tasks", JSON.stringify(data));
-    // this.onTasksListChanged(this._data);
   }
 
   getTask(id) {
@@ -1434,12 +1437,20 @@ class FormModel {
     localStorage.setItem("tasks", JSON.stringify([...this._data, task]));
   }
 
-  editTask({ id, location, service, taskType, description = "", fullText }) {
+  editTask({
+    id,
+    date,
+    location,
+    service,
+    taskType,
+    description = "",
+    fullText,
+  }) {
     const data = this._data.map((task) =>
       task.id === id
         ? {
             id,
-            date: this.createTaskDate(),
+            date,
             location,
             service,
             taskType,
@@ -1470,6 +1481,9 @@ class FormController {
     this.pubsub.subscribe("renderEditForm", (id) => {
       this.handleRenderEditForm(id);
     });
+    this.pubsub.subscribe("closeEditForm", (id) => {
+      this.handleCloseEditForm(id);
+    });
   }
 
   handleRenderAddForm() {
@@ -1482,6 +1496,10 @@ class FormController {
     this.view.renderEditForm(this.model.getTask(id), this.model.services);
     this.handlerBindEditTask();
     this.handlerRenderServiceTaskField(this.model.getTask(id).taskType);
+  }
+
+  handleCloseEditForm(id) {
+    this.view.closeEditForm(id);
   }
 
   handleGetTasks(service) {

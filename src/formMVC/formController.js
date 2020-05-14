@@ -8,6 +8,9 @@ export default class FormController {
     this.pubsub.subscribe("renderEditForm", (id) => {
       this.handleRenderEditForm(id);
     });
+    this.pubsub.subscribe("closeEditForm", (id) => {
+      this.handleCloseEditForm(id);
+    });
   }
 
   handleRenderAddForm() {
@@ -20,6 +23,10 @@ export default class FormController {
     this.view.renderEditForm(this.model.getTask(id), this.model.services);
     this.handlerBindEditTask();
     this.handlerRenderServiceTaskField(this.model.getTask(id).taskType);
+  }
+
+  handleCloseEditForm(id) {
+    this.view.closeEditForm(id);
   }
 
   handleGetTasks(service) {

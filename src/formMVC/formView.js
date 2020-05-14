@@ -197,7 +197,7 @@ export default class FormView {
       this.service = event.target.value;
       this.fullTextArr[0] = `I need a(an) ${this.service}`;
       this.checkedTypeRadio = "";
-      this.fullTextArr.splice(1, 1);
+      this.fullTextArr.splice(1);
       this.fillTextTaskFieldText();
     });
   }
@@ -214,9 +214,11 @@ export default class FormView {
       }
 
       this.taskType = event.target.value;
-      this.fullTextArr.splice(1, 1);
+
       this.fullTextArr[1] = ` to ${this.taskType}`;
+
       this.fillTextTaskFieldText();
+      this.fillThirdPartTaskFieldText();
     });
   }
 
@@ -252,6 +254,8 @@ export default class FormView {
     this.closeButton.addEventListener("click", () => {
       this._resetInputValues();
       this.clearFormContainer();
+      this.editTaskId = "";
+      this.editTaskDate = "";
     });
   }
 
@@ -364,6 +368,7 @@ export default class FormView {
   get _taskValues() {
     return {
       id: this.editTaskId ? this.editTaskId : "",
+      date: this.editTaskDate ? this.editTaskDate : "",
       location: this.location,
       service: this.service,
       taskType: this.taskType,
@@ -409,6 +414,7 @@ export default class FormView {
     this.clearFormContainer();
 
     this.editTaskId = task.id;
+    this.editTaskDate = task.date;
 
     const taskField = this._createTaskField({
       titleText: "EDIT TASK",
@@ -452,5 +458,15 @@ export default class FormView {
     this.fillFirstPartTaskFieldText();
     this.fillThirdPartTaskFieldText();
     this.closeForm();
+  }
+
+  closeEditForm(id) {
+    if (this.editTaskId === id) {
+      this._resetInputValues();
+      this.clearFormContainer();
+      this.editTaskId = "";
+      this.editTaskDate = "";
+    }
+    return;
   }
 }

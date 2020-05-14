@@ -117,7 +117,6 @@ export default class FormModel {
 
   _onDataChange(data) {
     localStorage.setItem("tasks", JSON.stringify(data));
-    // this.onTasksListChanged(this._data);
   }
 
   getTask(id) {
@@ -143,12 +142,20 @@ export default class FormModel {
     localStorage.setItem("tasks", JSON.stringify([...this._data, task]));
   }
 
-  editTask({ id, location, service, taskType, description = "", fullText }) {
+  editTask({
+    id,
+    date,
+    location,
+    service,
+    taskType,
+    description = "",
+    fullText,
+  }) {
     const data = this._data.map((task) =>
       task.id === id
         ? {
             id,
-            date: this.createTaskDate(),
+            date,
             location,
             service,
             taskType,

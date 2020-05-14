@@ -18,6 +18,7 @@ export default class TasksController {
 
   handleDeleteTask(id) {
     this.model.deleteTask(id);
+    this.handleCloseEditForm(id);
   }
 
   handlerRenderTasks() {
@@ -27,10 +28,6 @@ export default class TasksController {
     this.view.bindRenderEditForm((id) => {
       this.handlerRenderEditForm.call(this, id);
     });
-    // this.listView.bindCreateEditingForm(
-    //   this.handleCreateEditingForm.bind(this)
-    // );
-    // this.listView.bindEditUser(this.handleEditUser.bind(this));
   }
 
   handlerRenderAddForm() {
@@ -39,5 +36,9 @@ export default class TasksController {
 
   handlerRenderEditForm(id) {
     this.pubsub.publish("renderEditForm", id);
+  }
+
+  handleCloseEditForm(id) {
+    this.pubsub.publish("closeEditForm", id);
   }
 }
