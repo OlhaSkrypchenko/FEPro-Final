@@ -73,7 +73,7 @@ export default class TasksView {
   }
 
   renderTasks(tasks) {
-    if (tasks.length === 0) {
+    if (!tasks || tasks.length === 0) {
       this.tasksContainer.innerHTML = "";
       return;
     }
@@ -83,7 +83,11 @@ export default class TasksView {
   }
 
   bindDeleteTask(handler) {
-    this.tasksContainer.addEventListener("click", (event) => {
+    if (this.deleteListener) {
+      this.tasksContainer.removeEventListener("click", this.deleteListener);
+    }
+
+    this.deleteListener = (event) => {
       const dataId = event.target.dataset.id;
 
       if (!dataId) {
@@ -91,9 +95,10 @@ export default class TasksView {
       }
 
       const id = parseInt(dataId);
-
       handler(id);
-    });
+    };
+
+    this.tasksContainer.addEventListener("click", this.deleteListener);
   }
 
   bindRenderAddForm(handler) {
@@ -111,5 +116,10 @@ export default class TasksView {
       const id = parseInt(dataId);
       handler(id);
     });
+  }
+
+  bindRenderError() {
+    this.app.innerHTML = "";
+    this.app.innerHTML = "Щось пішло не так. Спробуйте пізніше";
   }
 }

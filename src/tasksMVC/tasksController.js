@@ -5,25 +5,30 @@ export default class TasksController {
     this.pubsub = pubsub;
 
     this.pubsub.subscribe("renderTasks", this.handlerRenderTasks.bind(this));
+    this.pubsub.subscribe("renderError", this.handlerRenderError.bind(this));
 
     this.handlerRenderTasks();
 
     this.model.bindTasksListChanged(this.onTasksListChanged.bind(this));
-    this.onTasksListChanged(this.model._data);
+  }
+
+  handlerRenderError() {
+    this.view.bindRenderError();
   }
 
   onTasksListChanged(data) {
     this.view.renderTasks(data);
   }
 
-  handleDeleteTask(id) {
-    this.model.deleteTask(id);
+  async deleteHandle(id) {
+    await this.model.deleteTask(id);
     this.handleCloseEditForm(id);
   }
 
-  handlerRenderTasks() {
-    this.view.renderTasks(this.model._data);
-    this.view.bindDeleteTask(this.handleDeleteTask.bind(this));
+  async handlerRenderTasks() {
+    const data = await this.model.getTasksData();
+    this.view.renderTasks(data);
+    this.view.bindDeleteTask(this.deleteHandle.bind(this));
     this.view.bindRenderAddForm(this.handlerRenderAddForm.bind(this));
     this.view.bindRenderEditForm((id) => {
       this.handlerRenderEditForm.call(this, id);

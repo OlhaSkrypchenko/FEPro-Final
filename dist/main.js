@@ -81,76 +81,139 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/******/ ({
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _static_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _static_styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_static_styles_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _tasksMVC_tasksView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _tasksMVC_tasksModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7);
-/* harmony import */ var _tasksMVC_tasksController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(8);
-/* harmony import */ var _formMVC_formView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var _formMVC_formModel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
-/* harmony import */ var _formMVC_formController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(11);
-/* harmony import */ var _pubsub__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(12);
-
-
-
-
-
-
-
-
-
-
-
-function app() {
-  const pubsub = new _pubsub__WEBPACK_IMPORTED_MODULE_7__["default"]();
-
-  const tasksView = new _tasksMVC_tasksView__WEBPACK_IMPORTED_MODULE_1__["default"]();
-  const tasksModel = new _tasksMVC_tasksModel__WEBPACK_IMPORTED_MODULE_2__["default"]();
-  const tasksController = new _tasksMVC_tasksController__WEBPACK_IMPORTED_MODULE_3__["default"](tasksModel, tasksView, pubsub);
-
-  const formView = new _formMVC_formView__WEBPACK_IMPORTED_MODULE_4__["default"]();
-  const formModel = new _formMVC_formModel__WEBPACK_IMPORTED_MODULE_5__["default"]();
-  const formController = new _formMVC_formController__WEBPACK_IMPORTED_MODULE_6__["default"](formModel, formView, pubsub);
-}
-
-app();
-
-
-/***/ }),
-/* 1 */
+/***/ "./node_modules/css-loader/dist/cjs.js!./static/styles.css":
+/*!*****************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./static/styles.css ***!
+  \*****************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var api = __webpack_require__(2);
-            var content = __webpack_require__(3);
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".app {\n  display: flex;\n  justify-content: space-between;\n}\n\n.l-form {\n  width: 500px;\n}\n\n.l-container {\n  width: 250px;\n}\n\n.c-button__add {\n  width: 100%;\n  margin: 15px 0;\n}\n\n.c-task {\n  border: 1px solid #000;\n  margin: 15px 0;\n  padding: 10px;\n}\n\n.c-form {\n  position: relative;\n}\n\n.c-button__close {\n  position: absolute;\n  top: 15px;\n  right: 10px;\n}\n\n.c-address {\n  min-height: 25px;\n  padding: 10px 0;\n}\n\n.c-taskText {\n  min-height: 50px;\n  padding: 10px 0;\n}\n", ""]);
+// Exports
+module.exports = exports;
 
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
 
 /***/ }),
-/* 2 */
+
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \****************************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -425,398 +488,247 @@ module.exports = function (list, options) {
 };
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
 
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".app {\n  display: flex;\n  justify-content: space-between;\n}\n\n.l-form {\n  width: 500px;\n}\n\n.l-container {\n  width: 250px;\n}\n\n.c-button__add {\n  width: 100%;\n  margin: 15px 0;\n}\n\n.c-task {\n  border: 1px solid #000;\n  margin: 15px 0;\n  padding: 10px;\n}\n\n.c-form {\n  position: relative;\n}\n\n.c-button__close {\n  position: absolute;\n  top: 15px;\n  right: 10px;\n}\n\n.c-address {\n  min-height: 25px;\n  padding: 10px 0;\n}\n\n.c-taskText {\n  min-height: 50px;\n  padding: 10px 0;\n}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-// eslint-disable-next-line func-names
-module.exports = function (useSourceMap) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item, useSourceMap);
-
-      if (item[2]) {
-        return "@media ".concat(item[2], " {").concat(content, "}");
-      }
-
-      return content;
-    }).join('');
-  }; // import a list of modules into the list
-  // eslint-disable-next-line func-names
-
-
-  list.i = function (modules, mediaQuery, dedupe) {
-    if (typeof modules === 'string') {
-      // eslint-disable-next-line no-param-reassign
-      modules = [[null, modules, '']];
-    }
-
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      if (mediaQuery) {
-        if (!item[2]) {
-          item[2] = mediaQuery;
-        } else {
-          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
-        }
-      }
-
-      list.push(item);
-    }
-  };
-
-  return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
-
-  var cssMapping = item[3];
-
-  if (!cssMapping) {
-    return content;
-  }
-
-  if (useSourceMap && typeof btoa === 'function') {
-    var sourceMapping = toComment(cssMapping);
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-  }
-
-  return [content].join('\n');
-} // Adapted from convert-source-map (MIT)
-
-
-function toComment(sourceMap) {
-  // eslint-disable-next-line no-undef
-  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
-  return "/*# ".concat(data, " */");
-}
-
-/***/ }),
-/* 5 */
+/***/ "./src/formMVC/formController.js":
+/*!***************************************!*\
+  !*** ./src/formMVC/formController.js ***!
+  \***************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TasksView; });
-/* harmony import */ var _reusable_reusable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
-
-
-class TasksView {
-  constructor() {
-    this.app = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["getElement"])(".app");
-    this.container = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["getElement"])(".l-container");
-    this.addButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "button",
-      className: "c-button__add",
-      children: "+ NEW TASK",
-    });
-
-    this.tasksContainer = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "div",
-      className: "l-tasks",
-    });
-
-    Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["appendChildren"])(this.container, [this.addButton, this.tasksContainer]);
-  }
-
-  createTaskCard(task) {
-    const date = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "p",
-      className: "c-date",
-      children: task.date,
-    });
-
-    const text = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "p",
-      className: "c-text",
-      children: task.fullText,
-    });
-
-    const editButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "button",
-      className: "c-button__edit",
-      children: "EDIT",
-      attributes: {
-        "data-edit-id": task.id,
-      },
-    });
-
-    const deleteButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "button",
-      className: "c-button__delete",
-      children: "DELETE",
-      attributes: {
-        "data-id": task.id,
-      },
-    });
-
-    const buttonContainer = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "div",
-      className: "l-button-container",
-      children: [editButton, deleteButton],
-    });
-
-    this.taskCard = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
-      element: "div",
-      className: "c-task",
-      attributes: {
-        id: task.id,
-      },
-      children: [date, text, buttonContainer],
-    });
-
-    Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["appendChild"])(this.tasksContainer, this.taskCard);
-  }
-
-  renderTasks(tasks) {
-    if (tasks.length === 0) {
-      this.tasksContainer.innerHTML = "";
-      return;
-    }
-
-    this.tasksContainer.innerHTML = "";
-    tasks.forEach((task) => this.createTaskCard(task));
-  }
-
-  bindDeleteTask(handler) {
-    this.tasksContainer.addEventListener("click", (event) => {
-      const dataId = event.target.dataset.id;
-
-      if (!dataId) {
-        return;
-      }
-
-      const id = parseInt(dataId);
-
-      handler(id);
-    });
-  }
-
-  bindRenderAddForm(handler) {
-    this.addButton.addEventListener("click", handler);
-  }
-
-  bindRenderEditForm(handler) {
-    this.tasksContainer.addEventListener("click", (event) => {
-      const dataId = event.target.dataset.editId;
-
-      if (!dataId) {
-        return;
-      }
-
-      const id = parseInt(dataId);
-      handler(id);
-    });
-  }
-}
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appendChild", function() { return appendChild; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appendChildren", function() { return appendChildren; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBasicElement", function() { return createBasicElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return getElement; });
-
-
-function appendChild(element, children = "") {
-  if (children === null) {
-    return;
-  }
-
-  if (typeof children === "string" || typeof children === "number") {
-    return (element.innerText += children);
-  }
-
-  return element.append(children);
-}
-
-function appendChildren(element, children = "") {
-  if (Array.isArray(children)) {
-    children.forEach((el) => appendChild(element, el));
-  } else {
-    appendChild(element, children);
-  }
-}
-
-function createBasicElement({
-  element,
-  className = [],
-  attributes = {},
-  children = "",
-}) {
-  const el = document.createElement(element);
-
-  if (typeof className === "string") {
-    el.classList.add(className);
-  } else {
-    el.classList.add(...className);
-  }
-
-  for (let key in attributes) {
-    el.setAttribute(key, attributes[key]);
-  }
-
-  appendChildren(el, children);
-
-  return el;
-}
-
-function getElement(selector) {
-  return document.querySelector(selector);
-}
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TasksModel; });
-class TasksModel {
-  constructor() {
-    if (!localStorage.getItem("tasks")) {
-      localStorage.setItem("tasks", JSON.stringify([]));
-    }
-  }
-
-  _onDataChange(data) {
-    localStorage.setItem("tasks", JSON.stringify(data));
-    this.onTasksListChanged(this._data);
-  }
-
-  get _data() {
-    return JSON.parse(localStorage.getItem("tasks"));
-  }
-
-  getTask(id) {
-    return this._data.find((el) => (el.id = id));
-  }
-
-  deleteTask(id) {
-    const data = this._data.filter((el) => el.id !== id);
-
-    this._onDataChange(data);
-  }
-
-  bindTasksListChanged(callback) {
-    this.onTasksListChanged = callback;
-  }
-}
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TasksController; });
-class TasksController {
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormController; });
+class FormController {
   constructor(model, view, pubsub) {
     this.model = model;
     this.view = view;
     this.pubsub = pubsub;
 
-    this.pubsub.subscribe("renderTasks", this.handlerRenderTasks.bind(this));
-
-    this.handlerRenderTasks();
-
-    this.model.bindTasksListChanged(this.onTasksListChanged.bind(this));
-    this.onTasksListChanged(this.model._data);
-  }
-
-  onTasksListChanged(data) {
-    this.view.renderTasks(data);
-  }
-
-  handleDeleteTask(id) {
-    this.model.deleteTask(id);
-    this.handleCloseEditForm(id);
-  }
-
-  handlerRenderTasks() {
-    this.view.renderTasks(this.model._data);
-    this.view.bindDeleteTask(this.handleDeleteTask.bind(this));
-    this.view.bindRenderAddForm(this.handlerRenderAddForm.bind(this));
-    this.view.bindRenderEditForm((id) => {
-      this.handlerRenderEditForm.call(this, id);
+    this.pubsub.subscribe("renderAddForm", this.handleRenderAddForm.bind(this));
+    this.pubsub.subscribe("renderEditForm", (id) => {
+      this.handleRenderEditForm(id);
+    });
+    this.pubsub.subscribe("closeEditForm", (id) => {
+      this.handleCloseEditForm(id);
     });
   }
 
-  handlerRenderAddForm() {
-    this.pubsub.publish("renderAddForm");
+  async handleRenderAddForm() {
+    try {
+      const services = await this.model.getServiceData();
+      this.view.renderAddForm(services);
+      this.handlerBindAddTask();
+      this.handlerRenderServiceTaskField();
+    } catch (error) {
+      this.handlerRenderError();
+    }
   }
 
-  handlerRenderEditForm(id) {
-    this.pubsub.publish("renderEditForm", id);
+  async handleRenderEditForm(id) {
+    try {
+      const services = await this.model.getServiceData();
+      const task = await this.model.getTask(id);
+      this.view.renderEditForm(task, services);
+      this.handlerBindEditTask();
+      this.handlerRenderServiceTaskField(task.taskType);
+    } catch (error) {
+      this.handlerRenderError();
+    }
   }
 
   handleCloseEditForm(id) {
-    this.pubsub.publish("closeEditForm", id);
+    this.view.closeEditForm(id);
+  }
+
+  handleGetServiceTasks(service) {
+    return this.model.getServiceTasks(service);
+  }
+
+  handlerBindAddTask() {
+    const handleAddTask = async (task) => {
+      await this.model.addTask(task);
+      this.handlerRenderTasks();
+    };
+    this.view.bindAddTask(handleAddTask);
+  }
+
+  handlerBindEditTask() {
+    const handleEditTask = async (task) => {
+      await this.model.editTask(task);
+      this.handlerRenderTasks();
+    };
+    this.view.bindEditTask(handleEditTask);
+  }
+
+  handlerRenderServiceTaskField(checkedTypeRadio) {
+    this.view.bindRenderServiceTaskField(
+      this.handleGetServiceTasks.bind(this),
+      checkedTypeRadio
+    );
+  }
+
+  handlerRenderTasks() {
+    this.pubsub.publish("renderTasks");
+  }
+
+  handlerRenderError() {
+    this.pubsub.publish("renderError");
   }
 }
 
 
 /***/ }),
-/* 9 */
+
+/***/ "./src/formMVC/formModel.js":
+/*!**********************************!*\
+  !*** ./src/formMVC/formModel.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormModel; });
+class FormModel {
+  constructor() {
+    this.serviceData;
+    this.url = "http://localhost:3000";
+  }
+
+  _createTaskDate() {
+    const currentDate = new Date();
+
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const day = days[currentDate.getDay()];
+
+    const month = months[currentDate.getMonth()];
+
+    const date = currentDate.getDate();
+
+    const hours =
+      currentDate.getHours() < 10
+        ? `0${currentDate.getHours()}`
+        : currentDate.getHours();
+
+    const minutes =
+      currentDate.getMinutes() < 10
+        ? `0${currentDate.getMinutes()}`
+        : currentDate.getMinutes();
+
+    return `${day}, ${month} ${date}, ${hours}:${minutes}`;
+  }
+
+  async _fetchServiceData() {
+    const response = await fetch(`${this.url}/services`);
+    return await response.json();
+  }
+
+  async getServiceData() {
+    if (!this.serviceData) {
+      this.serviceData = await this._fetchServiceData();
+    }
+
+    return this.serviceData;
+  }
+
+  getServiceTasks(serviceType) {
+    const service = this.serviceData.find((el) => el.type === serviceType);
+    return service.tasks;
+  }
+
+  async getTasksData() {
+    const response = await fetch(`${this.url}/tasks`);
+    return await response.json();
+  }
+
+  async getTask(id) {
+    const response = await fetch(`${this.url}/tasks/${id}`);
+    return await response.json();
+  }
+
+  async addTask({ location, service, taskType, description = "", fullText }) {
+    const task = {
+      date: this._createTaskDate(),
+      location,
+      service,
+      taskType,
+      description,
+      fullText,
+    };
+
+    await fetch(`${this.url}/tasks`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(task),
+    });
+  }
+
+  async editTask({
+    id,
+    date,
+    location,
+    service,
+    taskType,
+    description = "",
+    fullText,
+  }) {
+    const task = {
+      id,
+      date,
+      location,
+      service,
+      taskType,
+      description,
+      fullText,
+    };
+
+    await fetch(`${this.url}/tasks/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(task),
+    });
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/formMVC/formView.js":
+/*!*********************************!*\
+  !*** ./src/formMVC/formView.js ***!
+  \*********************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormView; });
-/* harmony import */ var _reusable_reusable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
+/* harmony import */ var _reusable_reusable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../reusable/reusable */ "./src/reusable/reusable.js");
 
 
 class FormView {
@@ -1191,13 +1103,12 @@ class FormView {
     };
   }
 
-  bindAddTask(handlerAdd, handlerRender) {
+  bindAddTask(handlerAdd) {
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
 
       if (this._taskValues) {
         handlerAdd(this._taskValues);
-        handlerRender();
       }
 
       this._resetInputValues();
@@ -1205,13 +1116,12 @@ class FormView {
     });
   }
 
-  bindEditTask(handlerEdit, handlerRender) {
+  bindEditTask(handlerEdit) {
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
 
       if (this._taskValues) {
         handlerEdit(this._taskValues);
-        handlerRender();
       }
 
       this._resetInputValues();
@@ -1281,268 +1191,63 @@ class FormView {
       this.editTaskId = "";
       this.editTaskDate = "";
     }
-    return;
   }
 }
 
 
 /***/ }),
-/* 10 */
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormModel; });
-class FormModel {
-  constructor() {
-    if (!localStorage.getItem("tasks")) {
-      localStorage.setItem("tasks", JSON.stringify([]));
-    }
+/* harmony import */ var _static_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../static/styles.css */ "./static/styles.css");
+/* harmony import */ var _static_styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_static_styles_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _tasksMVC_tasksView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tasksMVC/tasksView */ "./src/tasksMVC/tasksView.js");
+/* harmony import */ var _tasksMVC_tasksModel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasksMVC/tasksModel */ "./src/tasksMVC/tasksModel.js");
+/* harmony import */ var _tasksMVC_tasksController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tasksMVC/tasksController */ "./src/tasksMVC/tasksController.js");
+/* harmony import */ var _formMVC_formView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./formMVC/formView */ "./src/formMVC/formView.js");
+/* harmony import */ var _formMVC_formModel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./formMVC/formModel */ "./src/formMVC/formModel.js");
+/* harmony import */ var _formMVC_formController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./formMVC/formController */ "./src/formMVC/formController.js");
+/* harmony import */ var _pubsub__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pubsub */ "./src/pubsub.js");
 
-    this.services = [
-      {
-        type: "electrician",
-        tasks: [
-          "inspect electrical systems",
-          "connect wires",
-          "install electrical wiring",
-          "repair electrical wiring",
-          "install ground leads",
-          "connect power cables",
-        ],
-      },
-      {
-        type: "plumber",
-        tasks: [
-          "unblock a toilet",
-          "unblock a sink",
-          "fix a water leak",
-          "install a sink",
-          "install a shower",
-          "install a toilet",
-        ],
-      },
-      {
-        type: "gardener",
-        tasks: [
-          "plant and nurture new trees",
-          "clear rubbish",
-          "cut the grass",
-          "emptying bins",
-          "manage leaf raking",
-          "service garden equipment ",
-        ],
-      },
-      {
-        type: "housekeeper",
-        tasks: [
-          "mop floors",
-          "polish floors",
-          "shampoo carpets",
-          "clean wash basins",
-          "tidy up rooms",
-          "wash laundry",
-        ],
-      },
-      {
-        type: "cook",
-        tasks: [
-          "stock all ingredients",
-          "prepare cooking ingredients",
-          "prepare meat",
-          "prepare dinner",
-          "prepare lanch",
-          "prepare salads",
-        ],
-      },
-    ];
-  }
 
-  createTaskDate() {
-    const currentDate = new Date();
 
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
 
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
 
-    const day = days[currentDate.getDay()];
 
-    const month = months[currentDate.getMonth()];
 
-    const date = currentDate.getDate();
 
-    const hours =
-      currentDate.getHours() < 10
-        ? `0${currentDate.getHours()}`
-        : currentDate.getHours();
 
-    const minutes =
-      currentDate.getMinutes() < 10
-        ? `0${currentDate.getMinutes()}`
-        : currentDate.getMinutes();
 
-    return `${day}, ${month} ${date}, ${hours}:${minutes}`;
-  }
 
-  getTasks(serviceType) {
-    const service = this.services.find((el) => el.type === serviceType);
-    return service.tasks;
-  }
+function app() {
+  const pubsub = new _pubsub__WEBPACK_IMPORTED_MODULE_7__["default"]();
 
-  _onDataChange(data) {
-    localStorage.setItem("tasks", JSON.stringify(data));
-  }
+  const tasksView = new _tasksMVC_tasksView__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  const tasksModel = new _tasksMVC_tasksModel__WEBPACK_IMPORTED_MODULE_2__["default"]();
+  const tasksController = new _tasksMVC_tasksController__WEBPACK_IMPORTED_MODULE_3__["default"](tasksModel, tasksView, pubsub);
 
-  getTask(id) {
-    return this._data.find((el) => el.id === id);
-  }
-
-  get _data() {
-    return JSON.parse(localStorage.getItem("tasks"));
-  }
-
-  addTask({ location, service, taskType, description = "", fullText }) {
-    const tasks = this._data;
-    const task = {
-      id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1,
-      date: this.createTaskDate(),
-      location,
-      service,
-      taskType,
-      description,
-      fullText,
-    };
-
-    localStorage.setItem("tasks", JSON.stringify([...this._data, task]));
-  }
-
-  editTask({
-    id,
-    date,
-    location,
-    service,
-    taskType,
-    description = "",
-    fullText,
-  }) {
-    const data = this._data.map((task) =>
-      task.id === id
-        ? {
-            id,
-            date,
-            location,
-            service,
-            taskType,
-            description,
-            fullText,
-          }
-        : task
-    );
-    this._onDataChange(data);
-  }
+  const formView = new _formMVC_formView__WEBPACK_IMPORTED_MODULE_4__["default"]();
+  const formModel = new _formMVC_formModel__WEBPACK_IMPORTED_MODULE_5__["default"]();
+  const formController = new _formMVC_formController__WEBPACK_IMPORTED_MODULE_6__["default"](formModel, formView, pubsub);
 }
+
+app();
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FormController; });
-class FormController {
-  constructor(model, view, pubsub) {
-    this.model = model;
-    this.view = view;
-    this.pubsub = pubsub;
-
-    this.pubsub.subscribe("renderAddForm", this.handleRenderAddForm.bind(this));
-    this.pubsub.subscribe("renderEditForm", (id) => {
-      this.handleRenderEditForm(id);
-    });
-    this.pubsub.subscribe("closeEditForm", (id) => {
-      this.handleCloseEditForm(id);
-    });
-  }
-
-  handleRenderAddForm() {
-    this.view.renderAddForm(this.model.services);
-    this.handlerBindAddTask();
-    this.handlerRenderServiceTaskField();
-  }
-
-  handleRenderEditForm(id) {
-    this.view.renderEditForm(this.model.getTask(id), this.model.services);
-    this.handlerBindEditTask();
-    this.handlerRenderServiceTaskField(this.model.getTask(id).taskType);
-  }
-
-  handleCloseEditForm(id) {
-    this.view.closeEditForm(id);
-  }
-
-  handleGetTasks(service) {
-    return this.model.getTasks(service);
-  }
-
-  handleAddTask(task) {
-    this.model.addTask(task);
-  }
-
-  handleEditTask(task) {
-    this.model.editTask(task);
-  }
-
-  handlerBindAddTask() {
-    this.view.bindAddTask(
-      this.handleAddTask.bind(this),
-      this.handlerRenderTasks.bind(this)
-    );
-  }
-
-  handlerBindEditTask() {
-    this.view.bindEditTask(
-      this.handleEditTask.bind(this),
-      this.handlerRenderTasks.bind(this)
-    );
-  }
-
-  handlerRenderServiceTaskField(checkedTypeRadio) {
-    this.view.bindRenderServiceTaskField(
-      this.handleGetTasks.bind(this),
-      checkedTypeRadio
-    );
-  }
-
-  handlerRenderTasks() {
-    this.pubsub.publish("renderTasks");
-  }
-}
-
-
-/***/ }),
-/* 12 */
+/***/ "./src/pubsub.js":
+/*!***********************!*\
+  !*** ./src/pubsub.js ***!
+  \***********************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1569,5 +1274,335 @@ class PubSub {
 }
 
 
+/***/ }),
+
+/***/ "./src/reusable/reusable.js":
+/*!**********************************!*\
+  !*** ./src/reusable/reusable.js ***!
+  \**********************************/
+/*! exports provided: appendChild, appendChildren, createBasicElement, getElement */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appendChild", function() { return appendChild; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appendChildren", function() { return appendChildren; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createBasicElement", function() { return createBasicElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElement", function() { return getElement; });
+
+
+function appendChild(element, children = "") {
+  if (children === null) {
+    return;
+  }
+
+  if (typeof children === "string" || typeof children === "number") {
+    return (element.innerText += children);
+  }
+
+  return element.append(children);
+}
+
+function appendChildren(element, children = "") {
+  if (Array.isArray(children)) {
+    children.forEach((el) => appendChild(element, el));
+  } else {
+    appendChild(element, children);
+  }
+}
+
+function createBasicElement({
+  element,
+  className = [],
+  attributes = {},
+  children = "",
+}) {
+  const el = document.createElement(element);
+
+  if (typeof className === "string") {
+    el.classList.add(className);
+  } else {
+    el.classList.add(...className);
+  }
+
+  for (let key in attributes) {
+    el.setAttribute(key, attributes[key]);
+  }
+
+  appendChildren(el, children);
+
+  return el;
+}
+
+function getElement(selector) {
+  return document.querySelector(selector);
+}
+
+
+/***/ }),
+
+/***/ "./src/tasksMVC/tasksController.js":
+/*!*****************************************!*\
+  !*** ./src/tasksMVC/tasksController.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TasksController; });
+class TasksController {
+  constructor(model, view, pubsub) {
+    this.model = model;
+    this.view = view;
+    this.pubsub = pubsub;
+
+    this.pubsub.subscribe("renderTasks", this.handlerRenderTasks.bind(this));
+    this.pubsub.subscribe("renderError", this.handlerRenderError.bind(this));
+
+    this.handlerRenderTasks();
+
+    this.model.bindTasksListChanged(this.onTasksListChanged.bind(this));
+  }
+
+  handlerRenderError() {
+    this.view.bindRenderError();
+  }
+
+  onTasksListChanged(data) {
+    this.view.renderTasks(data);
+  }
+
+  async deleteHandle(id) {
+    await this.model.deleteTask(id);
+    this.handleCloseEditForm(id);
+  }
+
+  async handlerRenderTasks() {
+    const data = await this.model.getTasksData();
+    this.view.renderTasks(data);
+    this.view.bindDeleteTask(this.deleteHandle.bind(this));
+    this.view.bindRenderAddForm(this.handlerRenderAddForm.bind(this));
+    this.view.bindRenderEditForm((id) => {
+      this.handlerRenderEditForm.call(this, id);
+    });
+  }
+
+  handlerRenderAddForm() {
+    this.pubsub.publish("renderAddForm");
+  }
+
+  handlerRenderEditForm(id) {
+    this.pubsub.publish("renderEditForm", id);
+  }
+
+  handleCloseEditForm(id) {
+    this.pubsub.publish("closeEditForm", id);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/tasksMVC/tasksModel.js":
+/*!************************************!*\
+  !*** ./src/tasksMVC/tasksModel.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TasksModel; });
+class TasksModel {
+  constructor() {
+    this.url = "http://localhost:3000";
+  }
+
+  async getTasksData() {
+    const response = await fetch(`${this.url}/tasks`);
+    return await response.json();
+  }
+
+  async deleteTask(id) {
+    await fetch(`${this.url}/tasks/${id}`, {
+      method: "DELETE",
+    });
+
+    const data = await this.getTasksData();
+    this.onTasksListChanged(data);
+  }
+
+  bindTasksListChanged(callback) {
+    this.onTasksListChanged = callback;
+  }
+}
+
+
+/***/ }),
+
+/***/ "./src/tasksMVC/tasksView.js":
+/*!***********************************!*\
+  !*** ./src/tasksMVC/tasksView.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TasksView; });
+/* harmony import */ var _reusable_reusable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../reusable/reusable */ "./src/reusable/reusable.js");
+
+
+class TasksView {
+  constructor() {
+    this.app = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["getElement"])(".app");
+    this.container = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["getElement"])(".l-container");
+    this.addButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "button",
+      className: "c-button__add",
+      children: "+ NEW TASK",
+    });
+
+    this.tasksContainer = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "div",
+      className: "l-tasks",
+    });
+
+    Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["appendChildren"])(this.container, [this.addButton, this.tasksContainer]);
+  }
+
+  createTaskCard(task) {
+    const date = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "p",
+      className: "c-date",
+      children: task.date,
+    });
+
+    const text = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "p",
+      className: "c-text",
+      children: task.fullText,
+    });
+
+    const editButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "button",
+      className: "c-button__edit",
+      children: "EDIT",
+      attributes: {
+        "data-edit-id": task.id,
+      },
+    });
+
+    const deleteButton = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "button",
+      className: "c-button__delete",
+      children: "DELETE",
+      attributes: {
+        "data-id": task.id,
+      },
+    });
+
+    const buttonContainer = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "div",
+      className: "l-button-container",
+      children: [editButton, deleteButton],
+    });
+
+    this.taskCard = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
+      element: "div",
+      className: "c-task",
+      attributes: {
+        id: task.id,
+      },
+      children: [date, text, buttonContainer],
+    });
+
+    Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["appendChild"])(this.tasksContainer, this.taskCard);
+  }
+
+  renderTasks(tasks) {
+    if (!tasks || tasks.length === 0) {
+      this.tasksContainer.innerHTML = "";
+      return;
+    }
+
+    this.tasksContainer.innerHTML = "";
+    tasks.forEach((task) => this.createTaskCard(task));
+  }
+
+  bindDeleteTask(handler) {
+    if (this.deleteListener) {
+      this.tasksContainer.removeEventListener("click", this.deleteListener);
+    }
+
+    this.deleteListener = (event) => {
+      const dataId = event.target.dataset.id;
+
+      if (!dataId) {
+        return;
+      }
+
+      const id = parseInt(dataId);
+      handler(id);
+    };
+
+    this.tasksContainer.addEventListener("click", this.deleteListener);
+  }
+
+  bindRenderAddForm(handler) {
+    this.addButton.addEventListener("click", handler);
+  }
+
+  bindRenderEditForm(handler) {
+    this.tasksContainer.addEventListener("click", (event) => {
+      const dataId = event.target.dataset.editId;
+
+      if (!dataId) {
+        return;
+      }
+
+      const id = parseInt(dataId);
+      handler(id);
+    });
+  }
+
+  bindRenderError() {
+    this.app.innerHTML = "";
+    this.app.innerHTML = "Щось пішло не так. Спробуйте пізніше";
+  }
+}
+
+
+/***/ }),
+
+/***/ "./static/styles.css":
+/*!***************************!*\
+  !*** ./static/styles.css ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../node_modules/css-loader/dist/cjs.js!./styles.css */ "./node_modules/css-loader/dist/cjs.js!./static/styles.css");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
 /***/ })
-/******/ ]);
+
+/******/ });

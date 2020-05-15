@@ -377,13 +377,12 @@ export default class FormView {
     };
   }
 
-  bindAddTask(handlerAdd, handlerRender) {
+  bindAddTask(handlerAdd) {
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
 
       if (this._taskValues) {
         handlerAdd(this._taskValues);
-        handlerRender();
       }
 
       this._resetInputValues();
@@ -391,13 +390,12 @@ export default class FormView {
     });
   }
 
-  bindEditTask(handlerEdit, handlerRender) {
+  bindEditTask(handlerEdit) {
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
 
       if (this._taskValues) {
         handlerEdit(this._taskValues);
-        handlerRender();
       }
 
       this._resetInputValues();
@@ -467,6 +465,5 @@ export default class FormView {
       this.editTaskId = "";
       this.editTaskDate = "";
     }
-    return;
   }
 }

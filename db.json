@@ -1,0 +1,60 @@
+{
+  "tasks": [],
+  "services": [
+    {
+      "type": "electrician",
+      "tasks": [
+        "inspect electrical systems",
+        "connect wires",
+        "install electrical wiring",
+        "repair electrical wiring",
+        "install ground leads",
+        "connect power cables"
+      ]
+    },
+    {
+      "type": "plumber",
+      "tasks": [
+        "unblock a toilet",
+        "unblock a sink",
+        "fix a water leak",
+        "install a sink",
+        "install a shower",
+        "install a toilet"
+      ]
+    },
+    {
+      "type": "gardener",
+      "tasks": [
+        "plant and nurture new trees",
+        "clear rubbish",
+        "cut the grass",
+        "emptying bins",
+        "manage leaf raking",
+        "service garden equipment "
+      ]
+    },
+    {
+      "type": "housekeeper",
+      "tasks": [
+        "mop floors",
+        "polish floors",
+        "shampoo carpets",
+        "clean wash basins",
+        "tidy up rooms",
+        "wash laundry"
+      ]
+    },
+    {
+      "type": "cook",
+      "tasks": [
+        "stock all ingredients",
+        "prepare cooking ingredients",
+        "prepare meat",
+        "prepare dinner",
+        "prepare lanch",
+        "prepare salads"
+      ]
+    }
+  ]
+}

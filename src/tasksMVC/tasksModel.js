@@ -1,27 +1,20 @@
 export default class TasksModel {
   constructor() {
-    if (!localStorage.getItem("tasks")) {
-      localStorage.setItem("tasks", JSON.stringify([]));
-    }
+    this.url = "http://localhost:3000";
   }
 
-  _onDataChange(data) {
-    localStorage.setItem("tasks", JSON.stringify(data));
-    this.onTasksListChanged(this._data);
+  async getTasksData() {
+    const response = await fetch(`${this.url}/tasks`);
+    return await response.json();
   }
 
-  get _data() {
-    return JSON.parse(localStorage.getItem("tasks"));
-  }
+  async deleteTask(id) {
+    await fetch(`${this.url}/tasks/${id}`, {
+      method: "DELETE",
+    });
 
-  getTask(id) {
-    return this._data.find((el) => (el.id = id));
-  }
-
-  deleteTask(id) {
-    const data = this._data.filter((el) => el.id !== id);
-
-    this._onDataChange(data);
+    const data = await this.getTasksData();
+    this.onTasksListChanged(data);
   }
 
   bindTasksListChanged(callback) {

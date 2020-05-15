@@ -13,56 +13,65 @@ export default class FormController {
     });
   }
 
-  handleRenderAddForm() {
-    this.view.renderAddForm(this.model.services);
-    this.handlerBindAddTask();
-    this.handlerRenderServiceTaskField();
+  async handleRenderAddForm() {
+    try {
+      const services = await this.model.getServiceData();
+      this.view.renderAddForm(services);
+      this.handlerBindAddTask();
+      this.handlerRenderServiceTaskField();
+    } catch (error) {
+      this.handlerRenderError();
+    }
   }
 
-  handleRenderEditForm(id) {
-    this.view.renderEditForm(this.model.getTask(id), this.model.services);
-    this.handlerBindEditTask();
-    this.handlerRenderServiceTaskField(this.model.getTask(id).taskType);
+  async handleRenderEditForm(id) {
+    try {
+      const services = await this.model.getServiceData();
+      const task = await this.model.getTask(id);
+      this.view.renderEditForm(task, services);
+      this.handlerBindEditTask();
+      this.handlerRenderServiceTaskField(task.taskType);
+    } catch (error) {
+      this.handlerRenderError();
+    }
   }
 
   handleCloseEditForm(id) {
     this.view.closeEditForm(id);
   }
 
-  handleGetTasks(service) {
-    return this.model.getTasks(service);
-  }
-
-  handleAddTask(task) {
-    this.model.addTask(task);
-  }
-
-  handleEditTask(task) {
-    this.model.editTask(task);
+  handleGetServiceTasks(service) {
+    return this.model.getServiceTasks(service);
   }
 
   handlerBindAddTask() {
-    this.view.bindAddTask(
-      this.handleAddTask.bind(this),
-      this.handlerRenderTasks.bind(this)
-    );
+    const handleAddTask = async (task) => {
+      await this.model.addTask(task);
+      this.handlerRenderTasks();
+    };
+    this.view.bindAddTask(handleAddTask);
   }
 
   handlerBindEditTask() {
-    this.view.bindEditTask(
-      this.handleEditTask.bind(this),
-      this.handlerRenderTasks.bind(this)
-    );
+    const handleEditTask = async (task) => {
+      await this.model.editTask(task);
+      this.handlerRenderTasks();
+    };
+    this.view.bindEditTask(handleEditTask);
   }
 
   handlerRenderServiceTaskField(checkedTypeRadio) {
     this.view.bindRenderServiceTaskField(
-      this.handleGetTasks.bind(this),
+      this.handleGetServiceTasks.bind(this),
       checkedTypeRadio
     );
   }
 
   handlerRenderTasks() {
     this.pubsub.publish("renderTasks");
+  }
+
+  handlerRenderError() {
+    this.pubsub.publish("renderError");
   }
 }
