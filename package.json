@@ -7,6 +7,7 @@
     "build": "webpack",
     "serve": "serve \"./dist\" -s",
     "server": "json-server --watch db.json",
+    "start": "npm run server & npm run serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
