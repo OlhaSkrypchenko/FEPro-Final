@@ -18,6 +18,7 @@ export default class FormView {
 
     this.serviceTasksField = createBasicElement({
       element: "div",
+      className: "c-service-tasks-field",
     });
 
     this.fullTextArr = [];
@@ -60,6 +61,7 @@ export default class FormView {
 
     const taskField = createBasicElement({
       element: "div",
+      className: "c-task-field",
       children: [
         title,
         this.taskFieldText,
@@ -77,11 +79,16 @@ export default class FormView {
     this.locationInput = createBasicElement({
       element: "input",
       className: "c-input__location",
-      attributes: { required: "required", value: location },
+      attributes: {
+        placeholder: "Enter your address",
+        required: "required",
+        value: location,
+      },
     });
 
     const locationField = createBasicElement({
       element: "div",
+      className: "c-location-field",
       children: [title, this.locationInput],
     });
 
@@ -95,6 +102,7 @@ export default class FormView {
   } = {}) {
     const servicesField = createBasicElement({
       element: "div",
+      className: "c-service__field",
     });
 
     const title = this._createTitle(titleText);
@@ -124,6 +132,7 @@ export default class FormView {
 
       const label = createBasicElement({
         element: "label",
+        className: "c-label",
         attributes: {
           for: `${el.type}`,
         },
@@ -154,11 +163,15 @@ export default class FormView {
     this.descriptionInput = createBasicElement({
       element: "textarea",
       className: "c-textarea__description",
+      attributes: {
+        placeholder: "Enter your description",
+      },
       children: description,
     });
 
     const descriptionField = createBasicElement({
       element: "div",
+      className: "c-description__field",
       children: [title, this.descriptionInput],
     });
 
@@ -266,7 +279,7 @@ export default class FormView {
 
     this.serviceTaskContainer = createBasicElement({
       element: "div",
-      className: "l-tasks",
+      className: "l-service-tasks",
     });
 
     tasks.forEach((el) => {
@@ -288,6 +301,7 @@ export default class FormView {
 
       const label = createBasicElement({
         element: "label",
+        className: "c-label",
         attributes: {
           for: `${el}`,
         },
@@ -296,6 +310,7 @@ export default class FormView {
 
       const div = createBasicElement({
         element: "div",
+        className: "c-service-task",
         children: [radio, label],
       });
 

@@ -1,3 +1,13 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #1a1b1f;
+  background: url(./map_bg.png) no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
 .app {
   display: flex;
   justify-content: space-between;
@@ -8,21 +18,106 @@
 }
 
 .l-container {
-  width: 250px;
+  width: 330px;
+  margin: 10px 40px;
 }
 
 .c-button__add {
   width: 100%;
-  margin: 15px 0;
+  padding: 18px;
+  border-radius: 5px;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #4c71fe;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all, 1ms;
+}
+
+.c-button__add:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.c-button__add:active {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 1);
 }
 
 .c-task {
-  border: 1px solid #000;
-  margin: 15px 0;
+  width: 100%;
+  padding: 18px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin: 10px 0;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  transition: all, 1ms;
+}
+
+.c-task:hover {
+  transform: scale(1.05);
+}
+
+.c-date {
+  color: #909090;
+  font-size: 13px;
+}
+
+.c-text {
+  font-weight: bold;
+}
+
+.c-button__edit {
+  width: 50px;
   padding: 10px;
+  border-radius: 3px;
+  background-color: #4c71fe;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.c-button__edit:hover {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.c-button__edit:active {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+}
+
+.c-button__delete {
+  padding: 10px;
+  border-radius: 3px;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  color: #4c71fe;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.c-button__delete:hover {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.c-button__delete:active {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+}
+
+.l-form {
+  width: 500px;
+  padding: 0;
 }
 
 .c-form {
+  width: 100%;
+  background-color: #fff;
   position: relative;
 }
 
@@ -30,14 +125,125 @@
   position: absolute;
   top: 15px;
   right: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  color: #4c71fe;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all, 1ms;
+}
+
+.c-button__close:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.c-button__close:active {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+}
+
+.c-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #a6a6a6;
+  letter-spacing: 1px;
+}
+
+.c-task-field {
+  background-color: #f1f1f1;
+  padding: 12px 40px;
+}
+
+.c-button__create {
+  padding: 12px;
+  border-radius: 3px;
+  background-color: #4c71fe;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.c-button__create:hover {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+}
+
+.c-button__create:active {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 1);
 }
 
 .c-address {
+  font-size: 12px;
   min-height: 25px;
-  padding: 10px 0;
+  margin: 25px 0;
 }
 
 .c-taskText {
+  font-size: 16px;
+  font-weight: bold;
   min-height: 50px;
-  padding: 10px 0;
+  margin: 25px 0;
 }
+
+.c-input__location {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+}
+
+.c-textarea__description {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  resize: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.c-location-field,
+.c-service__field,
+.c-description__field {
+  padding: 12px 40px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.c-service-tasks-field {
+  padding: 12px 0;
+  border-top: 1px solid #f1f1f1;
+}
+
+.l-service {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 12px 0 24px;
+}
+
+.l-service .c-label {
+  text-transform: capitalize;
+}
+
+.c-label::first-letter {
+  text-transform: capitalize;
+}
+
+.l-service-tasks {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.c-service-task {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 20px 0 15px;
+}
+
+/* .c-input-service {
+  opacity: 0;
+} */

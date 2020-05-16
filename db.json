@@ -1,24 +1,14 @@
 {
-  "tasks": [
-    {
-      "date": "Friday, May 15, 20:10",
-      "location": "sdfsdfsdf",
-      "service": "gardener",
-      "taskType": "service garden equipment ",
-      "description": "sdfsdfs",
-      "fullText": "I need a(an) gardener to service garden equipment  , sdfsdfs",
-      "id": 1
-    }
-  ],
+  "tasks": [],
   "services": [
     {
       "type": "electrician",
       "tasks": [
-        "inspect electrical systems",
+        "inspect e-systems",
         "connect wires",
-        "install electrical wiring",
-        "repair electrical wiring",
-        "install ground leads",
+        "install wiring",
+        "repair wiring",
+        "install eads",
         "connect power cables"
       ]
     },
@@ -36,12 +26,12 @@
     {
       "type": "gardener",
       "tasks": [
-        "plant and nurture new trees",
+        "plant new trees",
         "clear rubbish",
         "cut the grass",
         "emptying bins",
-        "manage leaf raking",
-        "service garden equipment "
+        "do leaf raking",
+        "service equipment "
       ]
     },
     {
@@ -58,8 +48,8 @@
     {
       "type": "cook",
       "tasks": [
-        "stock all ingredients",
-        "prepare cooking ingredients",
+        "stock ingredients",
+        "prepare ingredients",
         "prepare meat",
         "prepare dinner",
         "prepare lanch",

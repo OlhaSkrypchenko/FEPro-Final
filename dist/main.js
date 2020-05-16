@@ -95,9 +95,12 @@
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+var ___CSS_LOADER_GET_URL_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+var ___CSS_LOADER_URL_IMPORT_0___ = __webpack_require__(/*! ./map_bg.png */ "./static/map_bg.png");
 exports = ___CSS_LOADER_API_IMPORT___(false);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = ___CSS_LOADER_GET_URL_IMPORT___(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-exports.push([module.i, ".app {\n  display: flex;\n  justify-content: space-between;\n}\n\n.l-form {\n  width: 500px;\n}\n\n.l-container {\n  width: 250px;\n}\n\n.c-button__add {\n  width: 100%;\n  margin: 15px 0;\n}\n\n.c-task {\n  border: 1px solid #000;\n  margin: 15px 0;\n  padding: 10px;\n}\n\n.c-form {\n  position: relative;\n}\n\n.c-button__close {\n  position: absolute;\n  top: 15px;\n  right: 10px;\n}\n\n.c-address {\n  min-height: 25px;\n  padding: 10px 0;\n}\n\n.c-taskText {\n  min-height: 50px;\n  padding: 10px 0;\n}\n", ""]);
+exports.push([module.i, "body {\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 14px;\n  color: #1a1b1f;\n  background: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") no-repeat;\n  background-size: cover;\n  margin: 0;\n  padding: 0;\n}\n\n.app {\n  display: flex;\n  justify-content: space-between;\n}\n\n.l-form {\n  width: 500px;\n}\n\n.l-container {\n  width: 330px;\n  margin: 10px 40px;\n}\n\n.c-button__add {\n  width: 100%;\n  padding: 18px;\n  border-radius: 5px;\n  background-color: #fff;\n  outline: none;\n  border: none;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);\n  color: #4c71fe;\n  font-size: 14px;\n  font-weight: bold;\n  transition: all, 1ms;\n}\n\n.c-button__add:hover {\n  transform: scale(1.05);\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);\n}\n\n.c-button__add:active {\n  box-shadow: 0 0 12px rgba(0, 0, 0, 1);\n}\n\n.c-task {\n  width: 100%;\n  padding: 18px;\n  border-radius: 5px;\n  background-color: #fff;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);\n  margin: 10px 0;\n  padding: 10px 16px;\n  box-sizing: border-box;\n  transition: all, 1ms;\n}\n\n.c-task:hover {\n  transform: scale(1.05);\n}\n\n.c-date {\n  color: #909090;\n  font-size: 13px;\n}\n\n.c-text {\n  font-weight: bold;\n}\n\n.c-button__edit {\n  width: 50px;\n  padding: 10px;\n  border-radius: 3px;\n  background-color: #4c71fe;\n  outline: none;\n  border: none;\n  color: #fff;\n  font-size: 13px;\n  font-weight: bold;\n  margin-right: 5px;\n}\n\n.c-button__edit:hover {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);\n}\n\n.c-button__edit:active {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 1);\n}\n\n.c-button__delete {\n  padding: 10px;\n  border-radius: 3px;\n  background-color: #fff;\n  outline: none;\n  border: none;\n  color: #4c71fe;\n  font-size: 13px;\n  font-weight: bold;\n}\n\n.c-button__delete:hover {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);\n}\n\n.c-button__delete:active {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 1);\n}\n\n.l-form {\n  width: 500px;\n  padding: 0;\n}\n\n.c-form {\n  width: 100%;\n  background-color: #fff;\n  position: relative;\n}\n\n.c-button__close {\n  position: absolute;\n  top: 15px;\n  right: 10px;\n  border-radius: 5px;\n  background-color: #fff;\n  outline: none;\n  border: none;\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);\n  color: #4c71fe;\n  font-size: 14px;\n  font-weight: bold;\n  transition: all, 1ms;\n}\n\n.c-button__close:hover {\n  transform: scale(1.05);\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);\n}\n\n.c-button__close:active {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 1);\n}\n\n.c-title {\n  font-size: 11px;\n  text-transform: uppercase;\n  color: #a6a6a6;\n  letter-spacing: 1px;\n}\n\n.c-task-field {\n  background-color: #f1f1f1;\n  padding: 12px 40px;\n}\n\n.c-button__create {\n  padding: 12px;\n  border-radius: 3px;\n  background-color: #4c71fe;\n  outline: none;\n  border: none;\n  color: #fff;\n  font-size: 14px;\n  font-weight: bold;\n  margin-right: 5px;\n}\n\n.c-button__create:hover {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);\n}\n\n.c-button__create:active {\n  box-shadow: 0 0 3px rgba(0, 0, 0, 1);\n}\n\n.c-address {\n  font-size: 12px;\n  min-height: 25px;\n  margin: 25px 0;\n}\n\n.c-taskText {\n  font-size: 16px;\n  font-weight: bold;\n  min-height: 50px;\n  margin: 25px 0;\n}\n\n.c-input__location {\n  border: none;\n  outline: none;\n  font-size: 16px;\n  width: 100%;\n}\n\n.c-textarea__description {\n  border: none;\n  outline: none;\n  font-size: 16px;\n  width: 100%;\n  resize: none;\n  font-family: Arial, Helvetica, sans-serif;\n}\n\n.c-location-field,\n.c-service__field,\n.c-description__field {\n  padding: 12px 40px;\n  border-bottom: 1px solid #f1f1f1;\n}\n\n.c-service-tasks-field {\n  padding: 12px 0;\n  border-top: 1px solid #f1f1f1;\n}\n\n.l-service {\n  display: flex;\n  justify-content: space-evenly;\n  padding: 12px 0 24px;\n}\n\n.l-service .c-label {\n  text-transform: capitalize;\n}\n\n.c-label::first-letter {\n  text-transform: capitalize;\n}\n\n.l-service-tasks {\n  display: flex;\n  justify-content: flex-start;\n  flex-wrap: wrap;\n}\n\n.c-service-task {\n  display: flex;\n  flex-direction: column;\n  margin: 15px 20px 0 15px;\n}\n\n/* .c-input-service {\n  opacity: 0;\n} */\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -206,6 +209,51 @@ function toComment(sourceMap) {
   var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
   return "/*# ".concat(data, " */");
 }
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function (url, options) {
+  if (!options) {
+    // eslint-disable-next-line no-param-reassign
+    options = {};
+  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign
+
+
+  url = url && url.__esModule ? url.default : url;
+
+  if (typeof url !== 'string') {
+    return url;
+  } // If url is already wrapped in quotes, remove them
+
+
+  if (/^['"].*['"]$/.test(url)) {
+    // eslint-disable-next-line no-param-reassign
+    url = url.slice(1, -1);
+  }
+
+  if (options.hash) {
+    // eslint-disable-next-line no-param-reassign
+    url += options.hash;
+  } // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+
+
+  if (/["'() \t\n]/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, '\\n'), "\"");
+  }
+
+  return url;
+};
 
 /***/ }),
 
@@ -744,6 +792,7 @@ class FormView {
 
     this.serviceTasksField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
+      className: "c-service-tasks-field",
     });
 
     this.fullTextArr = [];
@@ -786,6 +835,7 @@ class FormView {
 
     const taskField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
+      className: "c-task-field",
       children: [
         title,
         this.taskFieldText,
@@ -803,11 +853,16 @@ class FormView {
     this.locationInput = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "input",
       className: "c-input__location",
-      attributes: { required: "required", value: location },
+      attributes: {
+        placeholder: "Enter your address",
+        required: "required",
+        value: location,
+      },
     });
 
     const locationField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
+      className: "c-location-field",
       children: [title, this.locationInput],
     });
 
@@ -821,6 +876,7 @@ class FormView {
   } = {}) {
     const servicesField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
+      className: "c-service__field",
     });
 
     const title = this._createTitle(titleText);
@@ -850,6 +906,7 @@ class FormView {
 
       const label = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
         element: "label",
+        className: "c-label",
         attributes: {
           for: `${el.type}`,
         },
@@ -880,11 +937,15 @@ class FormView {
     this.descriptionInput = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "textarea",
       className: "c-textarea__description",
+      attributes: {
+        placeholder: "Enter your description",
+      },
       children: description,
     });
 
     const descriptionField = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
+      className: "c-description__field",
       children: [title, this.descriptionInput],
     });
 
@@ -992,7 +1053,7 @@ class FormView {
 
     this.serviceTaskContainer = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
       element: "div",
-      className: "l-tasks",
+      className: "l-service-tasks",
     });
 
     tasks.forEach((el) => {
@@ -1014,6 +1075,7 @@ class FormView {
 
       const label = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
         element: "label",
+        className: "c-label",
         attributes: {
           for: `${el}`,
         },
@@ -1022,6 +1084,7 @@ class FormView {
 
       const div = Object(_reusable_reusable__WEBPACK_IMPORTED_MODULE_0__["createBasicElement"])({
         element: "div",
+        className: "c-service-task",
         children: [radio, label],
       });
 
@@ -1573,6 +1636,19 @@ class TasksView {
   }
 }
 
+
+/***/ }),
+
+/***/ "./static/map_bg.png":
+/*!***************************!*\
+  !*** ./static/map_bg.png ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "7fae9930dbc7e89246da851a6c88e283.png");
 
 /***/ }),
 
